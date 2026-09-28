@@ -132,31 +132,48 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* =============================================
    NAVBAR
    ============================================= */
+/* Hero-embedded nav — transparent, always visible while the hero is on screen */
+.hero-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  padding: 26px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Floating glass nav — fixed pill, hidden until the hero scrolls out of view */
 #navbar {
   position: fixed;
-  top: 14px;
-  left: 32px;
-  right: 32px;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-16px);
+  width: calc(100% - 64px);
+  max-width: 900px;
   z-index: 1000;
   padding: 11px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 14px;
-  box-shadow: 0 10px 40px rgba(17,17,17,0.06), 0 2px 8px rgba(17,17,17,0.04);
-  transition: background 0.4s var(--ease-silk), padding 0.4s var(--ease-silk), backdrop-filter 0.4s, box-shadow 0.4s var(--ease-silk), border-color 0.4s;
-}
-#navbar.scrolled {
   background: rgba(255, 255, 255, 0.78);
-  padding: 9px 28px;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
   box-shadow: 0 14px 48px rgba(17,17,17,0.08), 0 2px 8px rgba(17,17,17,0.05);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-silk), visibility 0.5s;
+}
+#navbar.scrolled {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 .nav-logo {
   .nav-brand-mark{
@@ -1577,8 +1594,9 @@ footer {
 
 /* ── TABLET: 1200px ── */
 @media (max-width: 1200px) {
-  #navbar { left: 20px; right: 20px; padding: 10px 26px; }
+  #navbar { width: calc(100% - 40px); padding: 10px 26px; }
   #navbar.scrolled { padding: 8px 22px; }
+  .hero-nav { padding: 22px 30px; }
   #hero { padding: 0; }
   .hero-left { padding: 0 40px 60px; padding-top: 120px; }
   #authority, #specialties, #makeovers, #salon, #academy,
@@ -1596,13 +1614,13 @@ footer {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    left: 12px;
-    right: 12px;
+    width: calc(100% - 24px);
     top: 10px;
     border-radius: 14px;
     position: fixed;
   }
   #navbar.scrolled { padding: 8px 18px; }
+  .hero-nav { padding: 20px 20px; }
   /* Logo mark only — original brand span hidden, nav-brand-mobile centers it */
   .nav-logo {
     display: flex;
@@ -1937,12 +1955,13 @@ footer {
 @media (max-width: 600px) {
   /* ---- NAVBAR ---- */
   #navbar {
-    left: 10px; right: 10px;
+    width: calc(100% - 20px);
     top: max(8px, env(safe-area-inset-top, 8px));
     padding: 9px 16px;
     border-radius: 12px;
   }
   #navbar.scrolled { padding: 8px 14px; }
+  .hero-nav { padding: 18px 16px; }
   .nav-logo .nav-brand-mark { width: 30px; }
   .nav-brand-mobile { font-size: 11px; letter-spacing: 0.16em; }
   .nav-toggle span { width: 22px; }
@@ -2122,6 +2141,9 @@ footer {
   #navbar {
     top: max(8px, env(safe-area-inset-top, 8px));
   }
+  .hero-nav {
+    padding-top: max(18px, env(safe-area-inset-top, 18px));
+  }
 
   /* ---- MOBILE MENU: safe area + CTA gold distinction ---- */
   .mobile-menu {
@@ -2245,7 +2267,7 @@ footer {
   <a href="javascript:void(0)" class="nav-cta" onclick="openBookingModal(event)"><span>Book Your Experience</span></a>
   <!-- Mobile-only centered brand name — direct child of #navbar for perfect centering -->
   <span class="nav-brand-mobile" aria-hidden="true">Sandhya Verma</span>
-  <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+  <div class="nav-toggle" aria-label="Toggle navigation">
     <span></span><span></span><span></span>
   </div>
 </nav>
@@ -2262,6 +2284,22 @@ footer {
      HERO
      ============================================= -->
 <section id="hero">
+  <header class="hero-nav">
+    <a class="nav-logo">
+      <img src="assets/branding/logo-nav.svg" alt="SV Logo" class="nav-brand-mark">
+      <span>Sandhya Verma</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#makeovers">Makeovers</a></li>
+      <li><a href="#salon">Salon</a></li>
+      <li><a href="#academy">Academy</a></li>
+    </ul>
+    <a href="javascript:void(0)" class="nav-cta" onclick="openBookingModal(event)"><span>Book Your Experience</span></a>
+    <span class="nav-brand-mobile" aria-hidden="true">Sandhya Verma</span>
+    <div class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
   <div class="hero-left">
     <h1 class="hero-headline" id="heroHead">
       Own Every<br>Room You<br><em>Walk Into.</em>
@@ -2858,15 +2896,13 @@ footer {
   }, 2000);
 })();
 
-// ------- NAVBAR SCROLL -------
+// ------- FLOATING NAV: appears once the hero scrolls out of view -------
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-}, { passive: true });
+const heroSection = document.getElementById('hero');
+const heroNavObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => navbar.classList.toggle('scrolled', !entry.isIntersecting));
+}, { threshold: 0.1 });
+heroNavObserver.observe(heroSection);
 
 // ------- SCROLL REVEAL -------
 const revealObserver = new IntersectionObserver((entries) => {
@@ -2881,26 +2917,28 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ------- MOBILE MENU -------
-const navToggle = document.getElementById('navToggle');
+// Two toggle buttons exist (hero-nav + floating nav) and stay in sync.
+const navToggles = Array.from(document.querySelectorAll('.nav-toggle'));
 const mobileMenu = document.getElementById('mobileMenu');
 
 function openMobile() {
   mobileMenu.classList.add('open');
-  navToggle.classList.add('active');   // ☰ → ✕ animation
+  navToggles.forEach(t => t.classList.add('active'));   // ☰ → ✕ animation
   document.body.style.overflow = 'hidden';
 }
 function closeMobile() {
   mobileMenu.classList.remove('open');
-  navToggle.classList.remove('active');  // ✕ → ☰ animation
+  navToggles.forEach(t => t.classList.remove('active'));  // ✕ → ☰ animation
   document.body.style.overflow = '';
 }
-// Toggle on single element — no separate close button needed
-navToggle.addEventListener('click', function() {
-  if (mobileMenu.classList.contains('open')) {
-    closeMobile();
-  } else {
-    openMobile();
-  }
+navToggles.forEach(toggle => {
+  toggle.addEventListener('click', function() {
+    if (mobileMenu.classList.contains('open')) {
+      closeMobile();
+    } else {
+      openMobile();
+    }
+  });
 });
 // Close menu on overlay background tap
 mobileMenu.addEventListener('click', function(e) {
