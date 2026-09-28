@@ -145,14 +145,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: space-between;
 }
 
-/* Floating glass nav — fixed pill, hidden until the hero scrolls out of view */
+/* Floating glass nav — original wide bar shape, hidden until the hero scrolls out of view */
 #navbar {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-16px);
-  width: calc(100% - 64px);
-  max-width: 900px;
+  top: 14px;
+  left: 32px;
+  right: 32px;
   z-index: 1000;
   padding: 11px 32px;
   display: flex;
@@ -162,18 +160,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 999px;
+  border-radius: 14px;
   box-shadow: 0 14px 48px rgba(17,17,17,0.08), 0 2px 8px rgba(17,17,17,0.05);
   opacity: 0;
-  visibility: hidden;
+  transform: translateY(-16px);
   pointer-events: none;
-  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-silk), visibility 0.5s;
+  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-silk);
 }
 #navbar.scrolled {
   opacity: 1;
-  visibility: visible;
+  transform: translateY(0);
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
 }
 .nav-logo {
   .nav-brand-mark{
@@ -1594,7 +1591,7 @@ footer {
 
 /* ── TABLET: 1200px ── */
 @media (max-width: 1200px) {
-  #navbar { width: calc(100% - 40px); padding: 10px 26px; }
+  #navbar { left: 20px; right: 20px; padding: 10px 26px; }
   #navbar.scrolled { padding: 8px 22px; }
   .hero-nav { padding: 22px 30px; }
   #hero { padding: 0; }
@@ -1614,7 +1611,8 @@ footer {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    width: calc(100% - 24px);
+    left: 12px;
+    right: 12px;
     top: 10px;
     border-radius: 14px;
     position: fixed;
@@ -1955,7 +1953,7 @@ footer {
 @media (max-width: 600px) {
   /* ---- NAVBAR ---- */
   #navbar {
-    width: calc(100% - 20px);
+    left: 10px; right: 10px;
     top: max(8px, env(safe-area-inset-top, 8px));
     padding: 9px 16px;
     border-radius: 12px;
