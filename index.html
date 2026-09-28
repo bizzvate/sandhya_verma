@@ -148,7 +148,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 14px;
   box-shadow: 0 10px 40px rgba(17,17,17,0.06), 0 2px 8px rgba(17,17,17,0.04);
-  transition: background 0.4s var(--ease-silk), padding 0.4s var(--ease-silk), backdrop-filter 0.4s, box-shadow 0.4s var(--ease-silk), border-color 0.4s;
+  opacity: 0;
+  transform: translateY(-14px);
+  pointer-events: none;
+  transition: background 0.4s var(--ease-silk), padding 0.4s var(--ease-silk), backdrop-filter 0.4s, box-shadow 0.4s var(--ease-silk), border-color 0.4s, opacity 0.4s var(--ease-silk), transform 0.4s var(--ease-silk);
 }
 #navbar.scrolled {
   background: rgba(255, 255, 255, 0.78);
@@ -157,6 +160,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-color: rgba(255, 255, 255, 0.65);
   box-shadow: 0 14px 48px rgba(17,17,17,0.08), 0 2px 8px rgba(17,17,17,0.05);
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .nav-logo {
   .nav-brand-mark{
@@ -2712,6 +2718,7 @@ footer {
     <div class="footer-bottom">
       <p class="footer-copy">© 2024 Sandhya Verma. All rights reserved.</p>
       <p class="footer-tagline">Beauty · Confidence · Presence</p>
+      <p class="footer-credit">Project by <a href="https://bizaur.com" target="_blank" rel="noopener">Bizaur</a></p>
     </div>
     <div style="margin-top:28px; padding-top:24px; border-top:1px solid rgba(0,0,0,0.06); display:flex; gap:60px; flex-wrap:wrap;">
       <div>
