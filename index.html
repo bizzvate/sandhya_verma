@@ -148,10 +148,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 14px;
   box-shadow: 0 10px 40px rgba(17,17,17,0.06), 0 2px 8px rgba(17,17,17,0.04);
-  opacity: 0;
-  transform: translateY(-14px);
-  pointer-events: none;
-  transition: background 0.4s var(--ease-silk), padding 0.4s var(--ease-silk), backdrop-filter 0.4s, box-shadow 0.4s var(--ease-silk), border-color 0.4s, opacity 0.4s var(--ease-silk), transform 0.4s var(--ease-silk);
+  transition: background 0.4s var(--ease-silk), padding 0.4s var(--ease-silk), backdrop-filter 0.4s, box-shadow 0.4s var(--ease-silk), border-color 0.4s;
 }
 #navbar.scrolled {
   background: rgba(255, 255, 255, 0.78);
@@ -160,9 +157,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-color: rgba(255, 255, 255, 0.65);
   box-shadow: 0 14px 48px rgba(17,17,17,0.08), 0 2px 8px rgba(17,17,17,0.05);
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
 }
 .nav-logo {
   .nav-brand-mark{
